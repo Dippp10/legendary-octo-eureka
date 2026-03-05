@@ -13,21 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Update README
+      - name: Generate stats
         run: |
           mkdir -p profile
-          echo "Updating stats" > profile/stats.svg
+          curl -L -o profile/stats.svg "https://github-readme-stats.vercel.app/api?username=Dippp10&show_icons=true"
 
-      - name: Commit changes
+      - name: Commit file
         run: |
           git config --global user.name "Dippp10"
           git config --global user.email "deepikakarthik697@gmail.com"
           git add .
           git commit -m "Update README cards" || echo "No changes"
 
-      - name: Push changes
+      - name: Push
         run: |
           git push
